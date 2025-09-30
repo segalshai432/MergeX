@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Readiness Calculator - BusinessConnect SA</title>
+  <meta name="description" content="Use our readiness calculator to find out how prepared your business is to sell in South Africa.">
+  <meta name="author" content="BusinessConnect SA">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: 'hsl(221 83% 53%)',
+            accent: 'hsl(142 76% 36%)',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    .shadow-elegant {
+      box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-50 flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm border-b">
+    <div class="container mx-auto flex h-16 items-center justify-between px-4">
+      <div class="flex items-center space-x-2">
+        <div class="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+          <i data-lucide="building-2" class="h-5 w-5 text-white"></i>
+        </div>
+        <span class="text-xl font-bold text-primary">BusinessConnect SA</span>
+      </div>
+      <a href="/" class="px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+        ← Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-primary to-accent text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Business Readiness Calculator</h1>
+      <p class="text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
+        Find out how prepared your business is to sell — answer a few quick questions and get your readiness score instantly.
+      </p>
+    </div>
+  </section>
+
+  <!-- Calculator Section -->
+  <main class="flex-grow container mx-auto px-4 py-16">
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-elegant">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+        <i data-lucide="calculator" class="h-6 w-6 text-accent mr-2"></i>
+        Readiness Assessment
+      </h2>
+
+      <form id="calculatorForm" class="space-y-6">
+        <!-- Questions -->
+        <div id="questions" class="space-y-6"></div>
+
+        <button type="button" onclick="calculateScore()" class="w-full bg-accent text-white font-medium py-3 rounded-lg hover:bg-accent/90 transition-colors">
+          Calculate My Readiness Score
+        </button>
+      </form>
+
+      <!-- Result -->
+      <div id="result" class="mt-8 hidden p-6 rounded-lg text-center"></div>
+      <div id="suggestions" class="mt-6 hidden bg-gray-50 border p-6 rounded-lg text-left"></div>
+      <div id="listBusinessBtn" class="mt-6 hidden text-center">
+       <button 
+    onclick="window.location.href='signup.html'" 
+    class="px-8 py-4 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium"
+>
+    ✅ List Your Business Now
+</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-gray-400">© 2025 BusinessConnect SA. Helping South African business owners sell smarter.</p>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const questions = [
+      { text: "Are your financial records organized?", pro: "Financial Analyst", contact: "John Doe - 082 555 1234" },
+      { text: "Can your business operate without you?", pro: "Business Consultant", contact: "Jane Smith - 083 456 7890" },
+      { text: "Do you have clear documentation & processes?", pro: "Operations Consultant", contact: "Peter Brown - 084 987 6543" },
+      { text: "Is your reason for selling clear and strategic?", pro: "Business Advisor", contact: "Linda Green - 082 321 4567" },
+      { text: "Does your business have a professional website?", pro: "Web Designer", contact: "Alice Blue - 081 234 5678" },
+      { text: "Is your branding consistent and professional?", pro: "Branding Specialist", contact: "Michael Red - 083 222 1111" },
+      { text: "Do you have a stable and loyal customer base?", pro: "Customer Relations Consultant", contact: "Sara White - 082 444 9876" },
+      { text: "Is your business legally compliant (tax, licenses, etc.)?", pro: "Lawyer", contact: "Thomas Black - 084 555 3322" },
+      { text: "Do you have an effective marketing plan?", pro: "Marketing Consultant", contact: "Emma Yellow - 082 777 8888" },
+      { text: "Does your business show growth potential?", pro: "Growth Strategist", contact: "David Violet - 083 999 0000" },
+      { text: "Are you aware of your industry competition?", pro: "Market Analyst", contact: "Olivia Grey - 081 111 2222" },
+      { text: "Have you consulted with professionals before selling?", pro: "Business Broker", contact: "Lucas Gold - 084 333 4444" },
+    ];
+
+    const container = document.getElementById("questions");
+    questions.forEach((q, i) => {
+      container.innerHTML += `
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">${i + 1}. ${q.text}</label>
+          <select name="q${i}" data-pro="${q.pro}" data-contact="${q.contact}" class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary">
+            <option value="0">No</option>
+            <option value="2">Somewhat</option>
+            <option value="4">Yes</option>
+          </select>
+        </div>
+      `;
+    });
+
+    function calculateScore() {
+      const selects = document.querySelectorAll("select");
+      let score = 0;
+      let missingAreas = [];
+
+      selects.forEach(sel => {
+        score += parseInt(sel.value);
+        if (sel.value == "0") {
+          missingAreas.push({pro: sel.getAttribute("data-pro"), contact: sel.getAttribute("data-contact")});
+        }
+      });
+
+      const resultBox = document.getElementById("result");
+      const suggestionBox = document.getElementById("suggestions");
+      const listBtn = document.getElementById("listBusinessBtn");
+
+      resultBox.classList.remove("hidden");
+      suggestionBox.classList.remove("hidden");
+      listBtn.classList.add("hidden");
+
+      if (score >= 36) {
+        resultBox.className = "mt-8 p-6 rounded-lg text-center bg-green-100 text-green-800 font-bold";
+        resultBox.textContent = `✅ Excellent! Your readiness score is ${score}/48. You're highly prepared to sell.`;
+        listBtn.classList.remove("hidden"); // Show the List Business button
+      } else if (score >= 20) {
+        resultBox.className = "mt-8 p-6 rounded-lg text-center bg-yellow-100 text-yellow-800 font-bold";
+        resultBox.textContent = `⚠️ Moderate. Your readiness score is ${score}/48. Improve a few areas to maximize value.`;
+      } else {
+        resultBox.className = "mt-8 p-6 rounded-lg text-center bg-red-100 text-red-800 font-bold";
+        resultBox.textContent = `❌ Low. Your readiness score is ${score}/48. Work on improving key areas before listing.`;
+      }
+
+      // Suggestions
+      if (missingAreas.length > 0) {
+        suggestionBox.innerHTML = `
+          <h3 class="text-lg font-bold mb-3">👥 Suggested Professionals to Contact:</h3>
+          <ul class="list-disc pl-6 space-y-1 text-gray-700">
+            ${missingAreas.map(a => `<li>${a.pro} - ${a.contact}</li>`).join("")}
+          </ul>
+        `;
+      } else {
+        suggestionBox.innerHTML = `<p class="text-green-700 font-medium">🎉 You’re fully covered — no additional professionals needed!</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
