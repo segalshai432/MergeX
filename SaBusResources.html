@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SA Business Directory - BusinessConnect SA</title>
+<meta name="description" content="Discover South African businesses by category and rating. Connect with trusted professionals.">
+<meta name="author" content="BusinessConnect SA">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: 'hsl(221 83% 53%)',
+          accent: 'hsl(142 76% 36%)',
+          secondary: 'hsl(210 40% 96%)',
+          background: 'hsl(0 0% 100%)',
+        },
+        boxShadow: {
+          'card': '0 10px 25px rgba(0,0,0,0.1)',
+        },
+      }
+    }
+  }
+</script>
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="bg-gray-50">
+
+<!-- Header -->
+<header class="bg-white shadow sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <div class="h-10 w-10 rounded-lg bg-primary flex items-center justify-center">
+        <i data-lucide="briefcase" class="h-6 w-6 text-white"></i>
+      </div>
+      <span class="text-2xl font-bold text-primary">BusinessConnect SA</span>
+    </div>
+    <nav class="hidden md:flex space-x-6">
+      <a href="index.html" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+      <a href="marketplace.html" class="text-gray-600 hover:text-primary transition-colors">Marketplace</a>
+      <a href="RaiseCapital.html" class="text-gray-600 hover:text-primary transition-colors">Raise Capital</a>
+      <a href="#" class="text-primary font-semibold">Business Directory</a>
+    </nav>
+    <div class="hidden md:flex space-x-4">
+      <a href="BuzExplain.html" class="px-4 py-2 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg shadow hover:scale-105 transform transition">Get Started</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-primary to-accent py-20 text-white text-center">
+  <h1 class="text-4xl lg:text-5xl font-bold mb-4">South African Business Directory</h1>
+  <p class="text-lg lg:text-xl max-w-3xl mx-auto mb-6">Browse businesses by category, rating, and expertise. Find the right partner for your needs.</p>
+</section>
+
+<!-- Filter Buttons -->
+<section class="py-8 bg-gray-50">
+  <div class="container mx-auto px-4 flex flex-wrap justify-center gap-4">
+    <button class="filter-btn px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition" data-category="all">All</button>
+    <button class="filter-btn px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition" data-category="finance">Finance</button>
+    <button class="filter-btn px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition" data-category="it">IT</button>
+    <button class="filter-btn px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition" data-category="tech">Tech</button>
+    <button class="filter-btn px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition" data-category="advertising">Advertising</button>
+    <button class="filter-btn px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition" data-category="marketing">Marketing</button>
+  </div>
+</section>
+
+<!-- Business Cards -->
+<section class="py-12">
+  <div class="container mx-auto px-4 grid md:grid-cols-3 gap-6" id="business-container">
+    
+    <!-- Example Business Card -->
+    <div class="business-card bg-white rounded-xl shadow-card p-6 hover:shadow-xl transition transform hover:scale-105" data-category="finance">
+      <h3 class="text-xl font-semibold text-gray-800">FinSolutions SA</h3>
+      <p class="text-gray-500 text-sm mb-2">Finance</p>
+      <div class="flex items-center mb-2">
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-gray-300"></i>
+        <span class="ml-2 text-gray-600 text-sm">(4.0)</span>
+      </div>
+      <p class="text-gray-600 mb-3">Expert financial advisory and funding solutions for SMEs.</p>
+      <a href="mailto:contact@finsolutions.co.za" class="text-primary hover:underline">contact@finsolutions.co.za</a>
+    </div>
+
+    <div class="business-card bg-white rounded-xl shadow-card p-6 hover:shadow-xl transition transform hover:scale-105" data-category="it">
+      <h3 class="text-xl font-semibold text-gray-800">SA IT Experts</h3>
+      <p class="text-gray-500 text-sm mb-2">IT</p>
+      <div class="flex items-center mb-2">
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-gray-300"></i>
+        <i data-lucide="star" class="h-4 w-4 text-gray-300"></i>
+        <span class="ml-2 text-gray-600 text-sm">(3.0)</span>
+      </div>
+      <p class="text-gray-600 mb-3">IT consulting and cloud solutions for businesses across SA.</p>
+      <a href="mailto:info@saitexperts.co.za" class="text-primary hover:underline">info@saitexperts.co.za</a>
+    </div>
+
+    <div class="business-card bg-white rounded-xl shadow-card p-6 hover:shadow-xl transition transform hover:scale-105" data-category="marketing">
+      <h3 class="text-xl font-semibold text-gray-800">MarketPro</h3>
+      <p class="text-gray-500 text-sm mb-2">Marketing</p>
+      <div class="flex items-center mb-2">
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <i data-lucide="star" class="h-4 w-4 text-yellow-400"></i>
+        <span class="ml-2 text-gray-600 text-sm">(5.0)</span>
+      </div>
+      <p class="text-gray-600 mb-3">Creative marketing and advertising campaigns for South African businesses.</p>
+      <a href="mailto:info@marketpro.co.za" class="text-primary hover:underline">info@marketpro.co.za</a>
+    </div>
+
+    <!-- Add more business cards as needed, just change the data-category -->
+  </div>
+</section>
+
+<script>
+  // Lucide icons
+  lucide.createIcons();
+
+  // Filter function
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const businessCards = document.querySelectorAll('.business-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const category = button.dataset.category;
+
+      businessCards.forEach(card => {
+        if(category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
